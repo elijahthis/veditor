@@ -6,3 +6,36 @@
   font-family: AbeatbyKai;
   src: url(assets/fonts/abeatbyKaiRegular.otf);
 }
+
+@font-face {
+  font-family: 'Cerebri Sans Book';
+  src: url(assets/fonts/Cerebri\ Sans\ Book.ttf);
+  /* font-style: book; */
+}
+
+@font-face {
+  font-family: 'Cerebri Sans';
+  src: url(assets/fonts/Cerebri\ Sans\ Bold.ttf);
+  font-weight: 700;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'Cerebri Sans';
+  src: url(assets/fonts/Cerebri\ Sans\ SemiBold.ttf);
+  font-weight: 600;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'Cerebri Sans';
+  src: url(assets/fonts/Cerebri\ Sans\ SemiBold\ Italic.ttf);
+  font-weight: 600;
+  font-style: italic;
+}
+
+
+h3 {
+  font-size: 1rem;
+  line-height: 21px;
+  font-family: Cerebri Sans;
+  font-weight: 700;
+}

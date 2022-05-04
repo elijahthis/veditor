@@ -1,0 +1,17 @@
+@mixin play_tiles() {
+    .title {
+        font-family: Cerebri Sans;
+        font-size: 14px;
+        line-height: 18px;
+        font-weight: 600;
+        color: #ffffff;
+    }
+
+    .info {
+        font-family: Cerebri Sans Book;
+        font-size: 14px;
+        line-height: 18px;
+        font-weight: 600;
+        color: #bababa;
+    }
+}

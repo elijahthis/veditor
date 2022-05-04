@@ -1,0 +1,78 @@
+.navbar {
+    background-color: #000000;
+    display: grid;
+    grid-template-columns: 319px 1fr 319px;
+    color: #bababa;
+    font-family: Cerebri Sans Book;
+    font-size: 10px;
+
+    &__menu {
+        cursor: pointer;
+        > svg {
+            display: block;
+        }
+    }
+
+    &__logo > svg {
+        width: 77px;
+        // height: 17px;
+    }
+
+    &__profileImg {
+        width: 41px;
+        height: 41px;
+    }
+    &__listItem {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 0.25rem;
+        padding: 9px 0 8px 0;
+        transition: color 0.3s;
+
+        &:hover {
+            cursor: pointer;
+            color: #18c96a;
+            path {
+                fill: #18c96a;
+                transition: fill 0.3s;
+            }
+        }
+        &--active {
+            color: #18c96a;
+            path {
+                fill: #18c96a;
+            }
+        }
+    }
+
+    & > :first-child {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        gap: 20.5px;
+        padding-left: 51px;
+    }
+
+    & > :nth-child(2) {
+        ul {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: space-around;
+            list-style-type: none;
+
+            svg {
+                height: 30px;
+            }
+        }
+    }
+
+    & > :last-child {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        margin-left: auto;
+        margin-right: 40px;
+    }
+}

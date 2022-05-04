@@ -1,0 +1,29 @@
+button {
+    font-family: Cerebri Sans;
+    font-weight: 600;
+    font-size: 14px;
+    line-height: 18px;
+    cursor: pointer;
+}
+
+.primary {
+    width: 100%;
+    display: grid;
+    place-items: center;
+    padding: 10px 24px;
+    background-color: transparent;
+    color: #ffffff;
+    border: 1px solid #ffffff;
+    border-radius: 20px;
+}
+
+.secondary {
+    display: grid;
+    place-items: center;
+    padding: 9px 26px;
+    padding-right: 28px;
+    border-radius: 53px;
+    color: #000000;
+    background-color: #ffffff;
+    border: 1px solid #ffffff;
+}
