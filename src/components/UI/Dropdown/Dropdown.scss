@@ -1,0 +1,31 @@
+.Dropdown {
+    min-width: 67px;
+    background-color: #242625;
+    border-radius: 5px;
+
+    cursor: pointer;
+    position: relative;
+    z-index: 2;
+
+    &__current {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+    }
+
+    &__item {
+        padding: 4px 8px;
+    }
+
+    &__list {
+        position: absolute;
+        left: 0;
+        bottom: 0%;
+        background-color: #242625;
+        width: 100%;
+        height: max-content;
+        overflow: hidden;
+        transition: max-height 0.5s;
+    }
+}
