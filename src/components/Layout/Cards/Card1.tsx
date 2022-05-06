@@ -1,6 +1,10 @@
+import { useState } from "react";
 import SideCard from "../../UI/Cards/SideCard";
 import VideoPlaceholder from "../../UI/VideoPlaceholder";
 import Button from "../../UI/Button";
+import Modal from "../../UI/Modals/Modal";
+import { useModal } from "../../../hooks/useModal";
+import { ImportVideo } from "../../UI/Modals/ModalChildren";
 
 const Card1 = (): JSX.Element => {
     const dataList: { image: string; title: string; duration: number }[] = [
@@ -20,6 +24,7 @@ const Card1 = (): JSX.Element => {
             duration: 60,
         },
     ];
+    const { openModal, setOpenModal, modalChild, setModalChild } = useModal();
 
     return (
         <SideCard>
@@ -49,8 +54,22 @@ const Card1 = (): JSX.Element => {
                     ))}
                 </div>
                 <div className="btn">
-                    <Button variant="primary">See more</Button>
+                    <Button
+                        variant="primary"
+                        onClick={() => {
+                            console.log("button clickedd");
+                            setModalChild(
+                                <ImportVideo setOpenModal={setOpenModal} />
+                            );
+                            setOpenModal(true);
+                        }}
+                    >
+                        See more
+                    </Button>
                 </div>
+                <Modal openModal={openModal} setOpenModal={setOpenModal}>
+                    {modalChild}
+                </Modal>
             </div>
         </SideCard>
     );

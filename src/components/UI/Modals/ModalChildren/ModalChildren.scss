@@ -1,0 +1,57 @@
+.ImportVideo {
+    width: 711px;
+    height: 459px;
+
+    background: #1a1a1a 0% 0% no-repeat padding-box;
+    border-radius: 20px;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 50px 109px 50px 109px;
+    position: relative;
+
+    &__header {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 12px;
+    }
+
+    &__options {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        gap: 30px;
+        margin-top: 2rem;
+    }
+
+    &__option {
+        width: 231px;
+        height: 219px;
+        background: #080808 0% 0% no-repeat padding-box;
+        border-radius: 12px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: flex-end;
+        gap: 32px;
+        cursor: pointer;
+        padding: 45px 16px;
+    }
+}
+
+.close {
+    width: 20px;
+    height: 20px;
+    background: rgba(255, 255, 255, 0.4) 0% 0% no-repeat padding-box;
+    border-radius: 0.4rem;
+
+    display: grid;
+    place-items: center;
+
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    cursor: pointer;
+}

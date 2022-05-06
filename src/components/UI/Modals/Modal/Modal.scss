@@ -1,0 +1,12 @@
+.modal-div {
+    width: 100vw;
+    height: 100vh;
+    place-items: center;
+    overflow-y: scroll;
+    background-color: #050404cb;
+    color: #ffffff;
+
+    &:focus {
+        outline: none;
+    }
+}
