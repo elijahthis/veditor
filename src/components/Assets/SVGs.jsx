@@ -856,3 +856,20 @@ export const ImportDevice = () => (
         </g>
     </svg>
 );
+
+export const MusicIcon = ({ size }) => (
+    <svg
+        xmlns="http://www.w3.org/2000/svg"
+        width={size}
+        height={size * 1.00399}
+        viewBox="0 0 12.778 12.829"
+    >
+        <path
+            id="noun-music-4711478"
+            d="M90.915,23.982H89.627a2.13,2.13,0,1,0,2.13,2.132l.011-6.042,7.656-1.533v5.443H98.134a2.13,2.13,0,1,0,2.13,2.132l.011-8.572a2.13,2.13,0,0,0-2.548-2.088l-5.1,1.021a2.13,2.13,0,0,0-1.711,2.088Z"
+            transform="translate(-87.497 -15.413)"
+            fill="#bababa"
+            fillRule="evenodd"
+        />
+    </svg>
+);

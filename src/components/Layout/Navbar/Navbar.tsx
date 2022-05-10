@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { NavLink } from "react-router-dom";
+import Modal from "../../UI/Modals/Modal";
 import {
     LogoSVG,
     MenuSVG,
@@ -12,19 +13,33 @@ import {
     NavSVG7,
 } from "../../Assets/SVGs";
 import ProfilePicture from "../../UI/ProfilePicture";
+import { ImportVideo } from "../../UI/Modals/ModalChildren";
 import "./Navbar.scss";
+import { useModal } from "../../../hooks/useModal";
 
 const Navbar = (): JSX.Element => {
     const [active, setActive] = useState(0);
+
+    const { openModal, setOpenModal, modalChild, setModalChild } = useModal();
+
     const navData = [
-        { title: "Video Editing", icon: <NavSVG1 /> },
-        { title: "Import Video", icon: <NavSVG2 /> },
-        { title: "Add Voiceover", icon: <NavSVG3 /> },
-        { title: "Filters / Effects", icon: <NavSVG4 /> },
-        { title: "Add Subtitles", icon: <NavSVG5 /> },
-        { title: "3D Preview", icon: <NavSVG6 /> },
-        { title: "Sound Engine", icon: <NavSVG7 /> },
+        { title: "Video Editing", icon: <NavSVG1 />, clickFunc: () => {} },
+        {
+            title: "Import Video",
+            icon: <NavSVG2 />,
+            clickFunc: () => {
+                console.log("button clickedd");
+                setModalChild(<ImportVideo setOpenModal={setOpenModal} />);
+                setOpenModal(true);
+            },
+        },
+        { title: "Add Voiceover", icon: <NavSVG3 />, clickFunc: () => {} },
+        { title: "Filters / Effects", icon: <NavSVG4 />, clickFunc: () => {} },
+        { title: "Add Subtitles", icon: <NavSVG5 />, clickFunc: () => {} },
+        { title: "3D Preview", icon: <NavSVG6 />, clickFunc: () => {} },
+        { title: "Sound Engine", icon: <NavSVG7 />, clickFunc: () => {} },
     ];
+
     return (
         <header className="navbar">
             <div>
@@ -46,7 +61,12 @@ const Navbar = (): JSX.Element => {
                                     : "")
                             }
                             key={ind}
-                            onClick={() => setActive(ind)}
+                            onClick={() => {
+                                if (navItem.clickFunc) navItem.clickFunc();
+                                else {
+                                    setActive(ind);
+                                }
+                            }}
                         >
                             {navItem.icon}
                             <p>{navItem.title}</p>
@@ -59,6 +79,9 @@ const Navbar = (): JSX.Element => {
                     <ProfilePicture imageURL="/assets/images/profile-img.png" />
                 </div>
             </div>
+            <Modal openModal={openModal} setOpenModal={setOpenModal}>
+                {modalChild}
+            </Modal>
         </header>
     );
 };

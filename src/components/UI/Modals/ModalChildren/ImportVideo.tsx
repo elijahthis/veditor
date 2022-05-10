@@ -1,7 +1,6 @@
 import "./ModalChildren.scss";
 import { ImportVeditor, ImportDevice } from "../../../Assets/SVGs";
 import { IoClose } from "react-icons/io5";
-import { useEffect, useRef } from "react";
 
 interface ImportVideoProps {
     setOpenModal: (argg: boolean) => void;

@@ -1,0 +1,42 @@
+.TimelineGrid {
+    display: grid;
+    grid-template-rows: 54.5px 56px 56px 1fr;
+    gap: 0;
+    background: #080808 0% 0% no-repeat padding-box;
+    color: white;
+    border-radius: 10px;
+    min-height: 230px;
+    & > :last-child {
+        border-bottom: 0;
+    }
+}
+
+.TimelineGridRow {
+    display: grid;
+    grid-template-columns: 130px 1fr;
+    gap: 0;
+    border-bottom: 1px solid #bfbfbf27;
+
+    & > :first-child {
+        border-right: 1px solid #bfbfbf27;
+    }
+
+    &__icons {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: center;
+        gap: 1rem;
+    }
+}
+
+.timelineWrapper {
+    padding: 11.5px 15.5px;
+
+    &--header {
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-end;
+        padding: 0 15.5px;
+    }
+}
