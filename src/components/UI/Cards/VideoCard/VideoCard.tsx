@@ -15,12 +15,16 @@ import Dropdown from "../../Dropdown";
 import { MutableRefObject, useEffect, useRef, useState } from "react";
 import { secondsToTime } from "../../../../helpers/functions";
 
-const VideoCard = (): JSX.Element => {
-    const vidInfo = {
-        placeholder: "/assets/images/video-placeholder.jpg",
-        duration: 23,
-    };
+declare global {
+    interface Element {
+        requestFullScreen?(): void;
+        msRequestFullscreen(): void;
+        webkitRequestFullscreen(): void;
+        mozRequestFullScreen(): void;
+    }
+}
 
+const VideoCard = (): JSX.Element => {
     const videoRef = useRef() as MutableRefObject<HTMLVideoElement>;
     const [paused, setPaused] = useState(true);
     const [duration, setDuration] = useState(0);
@@ -29,26 +33,28 @@ const VideoCard = (): JSX.Element => {
     return (
         <div className="VideoCard">
             <div className="VideoCard__placeholder">
-                {/* <img src={vidInfo.placeholder} alt="video" /> */}
                 <video
                     src="/assets/video/Real 4K HDR .mp4"
-                    controls
+                    // controls
                     ref={videoRef}
                     id="my-video"
                     onPause={() => {
                         setPaused(true);
                     }}
+                    onPlay={() => {
+                        setPaused(false);
+                    }}
                     onLoadedMetadata={() => {
                         setDuration(videoRef.current.duration);
                         setInterval(() => {
                             setCurrentTime(videoRef.current.currentTime);
-                        }, 1000);
+                        }, 50);
                     }}
                 ></video>
             </div>
             <div className="VideoCard__controls">
                 <div>
-                    <Slider posn={Math.floor((currentTime / duration) * 100)} />
+                    <Slider posn={(currentTime / duration) * 100} />
                     <p>{secondsToTime(duration)}</p>
                 </div>
                 <div>
@@ -96,7 +102,27 @@ const VideoCard = (): JSX.Element => {
                     <div className="VideoCard__controls__other">
                         <CameraIcon size={18} />
                         <VolumeDown size={18} />
-                        <ExpandIcon size={18} />
+                        <span
+                            onClick={() => {
+                                if (videoRef.current.requestFullscreen) {
+                                    videoRef.current.requestFullscreen();
+                                } else if (
+                                    videoRef.current.mozRequestFullScreen
+                                ) {
+                                    videoRef.current.mozRequestFullScreen();
+                                } else if (
+                                    videoRef.current.webkitRequestFullscreen
+                                ) {
+                                    videoRef.current.webkitRequestFullscreen();
+                                } else if (
+                                    videoRef.current.msRequestFullscreen
+                                ) {
+                                    videoRef.current.msRequestFullscreen();
+                                }
+                            }}
+                        >
+                            <ExpandIcon size={18} />
+                        </span>
                     </div>
                 </div>
             </div>

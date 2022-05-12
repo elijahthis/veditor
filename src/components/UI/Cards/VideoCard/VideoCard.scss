@@ -13,6 +13,8 @@
     &__placeholder {
         width: 100%;
         overflow: hidden;
+        display: grid;
+        place-items: center;
     }
 
     video {
