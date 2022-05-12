@@ -23,8 +23,10 @@ const Dropdown = ({ list, up }: DropdownProps): JSX.Element => {
                     maxHeight: collapsed ? "0" : "200%",
                 }}
             >
-                {list.map((item) => (
-                    <div className="Dropdown__item">{item}</div>
+                {list.map((item, ind) => (
+                    <div className="Dropdown__item" key={ind}>
+                        {item}
+                    </div>
                 ))}
             </div>
         </div>

@@ -1,3 +1,4 @@
+import { Dispatch, SetStateAction } from "react";
 import Slider from "../../Slider";
 import "./VideoCard.scss";
 import {
@@ -23,8 +24,15 @@ declare global {
         mozRequestFullScreen(): void;
     }
 }
+interface VideoCardProps {
+    currentVideo: string;
+    setCurrentVideo: Dispatch<SetStateAction<string>>;
+}
 
-const VideoCard = (): JSX.Element => {
+const VideoCard = ({
+    currentVideo,
+    setCurrentVideo,
+}: VideoCardProps): JSX.Element => {
     const videoRef = useRef() as MutableRefObject<HTMLVideoElement>;
     const [paused, setPaused] = useState(true);
     const [duration, setDuration] = useState(0);
@@ -34,7 +42,7 @@ const VideoCard = (): JSX.Element => {
         <div className="VideoCard">
             <div className="VideoCard__placeholder">
                 <video
-                    src="/assets/video/Real 4K HDR .mp4"
+                    src={currentVideo || "/assets/video/Real 4K HDR .mp4"}
                     // controls
                     ref={videoRef}
                     id="my-video"
@@ -46,15 +54,27 @@ const VideoCard = (): JSX.Element => {
                     }}
                     onLoadedMetadata={() => {
                         setDuration(videoRef.current.duration);
-                        setInterval(() => {
-                            setCurrentTime(videoRef.current.currentTime);
-                        }, 50);
+                    }}
+                    onCanPlayThrough={() => {
+                        try {
+                            const videoInterval = setInterval(() => {
+                                setCurrentTime(videoRef.current.currentTime);
+                            }, 50);
+                        } catch (e) {
+                            console.log(e);
+                        }
                     }}
                 ></video>
             </div>
             <div className="VideoCard__controls">
                 <div>
-                    <Slider posn={(currentTime / duration) * 100} />
+                    <Slider
+                        posn={(currentTime / duration) * 100}
+                        currentTime={currentTime}
+                        setCurrentTime={setCurrentTime}
+                        duration={duration}
+                        vidElement={videoRef.current}
+                    />
                     <p>{secondsToTime(duration)}</p>
                 </div>
                 <div>

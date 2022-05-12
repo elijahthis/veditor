@@ -8,7 +8,7 @@ const TimelineHeader = (): JSX.Element => {
                 {Array(3)
                     .fill(0)
                     .map((item, ind) => (
-                        <div className="TimelineHeader__line"></div>
+                        <div className="TimelineHeader__line" key={ind}></div>
                     ))}
                 {Array(61)
                     .fill(0)
@@ -19,6 +19,7 @@ const TimelineHeader = (): JSX.Element => {
                                     ? "TimelineHeader__line--long"
                                     : ""
                             }`}
+                            key={ind}
                         >
                             {ind % 5 === 0 ? (
                                 <span className="TimelineHeader__number">
@@ -30,7 +31,7 @@ const TimelineHeader = (): JSX.Element => {
                 {Array(3)
                     .fill(0)
                     .map((item, ind) => (
-                        <div className="TimelineHeader__line"></div>
+                        <div className="TimelineHeader__line" key={ind}></div>
                     ))}
             </div>
         </div>

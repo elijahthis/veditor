@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { Dispatch, useState, SetStateAction } from "react";
 import { NavLink } from "react-router-dom";
 import Modal from "../../UI/Modals/Modal";
 import {
@@ -17,7 +17,15 @@ import { ImportVideo } from "../../UI/Modals/ModalChildren";
 import "./Navbar.scss";
 import { useModal } from "../../../hooks/useModal";
 
-const Navbar = (): JSX.Element => {
+interface NavbarProps {
+    currentVideo: string;
+    setCurrentVideo: Dispatch<SetStateAction<string>>;
+}
+
+const Navbar = ({
+    currentVideo,
+    setCurrentVideo,
+}: NavbarProps): JSX.Element => {
     const [active, setActive] = useState(0);
 
     const { openModal, setOpenModal, modalChild, setModalChild } = useModal();
@@ -29,7 +37,13 @@ const Navbar = (): JSX.Element => {
             icon: <NavSVG2 />,
             clickFunc: () => {
                 console.log("button clickedd");
-                setModalChild(<ImportVideo setOpenModal={setOpenModal} />);
+                setModalChild(
+                    <ImportVideo
+                        setOpenModal={setOpenModal}
+                        currentVideo={currentVideo}
+                        setCurrentVideo={setCurrentVideo}
+                    />
+                );
                 setOpenModal(true);
             },
         },
