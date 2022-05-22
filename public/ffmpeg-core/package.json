@@ -1,0 +1,65 @@
+{
+  "_from": "@ffmpeg/core",
+  "_id": "@ffmpeg/core@0.10.0",
+  "_inBundle": false,
+  "_integrity": "sha512-qunWJl5PezpXEm31tb8Qu5z37B5KVA1VYZCpXchMhuAb3X9T7PuE3SlhOwphEoRhzaOa3lpofDfzihAUMFaVPQ==",
+  "_location": "/@ffmpeg/core",
+  "_phantomChildren": {},
+  "_requested": {
+    "type": "tag",
+    "registry": true,
+    "raw": "@ffmpeg/core",
+    "name": "@ffmpeg/core",
+    "escapedName": "@ffmpeg%2fcore",
+    "scope": "@ffmpeg",
+    "rawSpec": "",
+    "saveSpec": null,
+    "fetchSpec": "latest"
+  },
+  "_requiredBy": [
+    "#USER",
+    "/"
+  ],
+  "_resolved": "https://registry.npmjs.org/@ffmpeg/core/-/core-0.10.0.tgz",
+  "_shasum": "f6a58361b22d7c23c6f7071b9fff6d572bc3f499",
+  "_spec": "@ffmpeg/core",
+  "_where": "C:\\Users\\OWNER\\Documents\\veditor",
+  "author": {
+    "name": "jeromewus@gmail.com"
+  },
+  "bugs": {
+    "url": "https://github.com/ffmpegwasm/FFmpeg/issues"
+  },
+  "bundleDependencies": false,
+  "deprecated": false,
+  "description": "ffmpeg.wasm core",
+  "devDependencies": {
+    "jest": "^26.4.2",
+    "serve": "^11.3.2"
+  },
+  "files": [
+    "dist",
+    "package.json",
+    "package-lock.json"
+  ],
+  "homepage": "https://github.com/ffmpegwasm/FFmpeg#readme",
+  "keywords": [
+    "ffmpeg",
+    "webassembly",
+    "video",
+    "audio",
+    "transcode"
+  ],
+  "license": "MIT",
+  "main": "dist/ffmpeg-core.js",
+  "name": "@ffmpeg/core",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ffmpegwasm/FFmpeg.git"
+  },
+  "scripts": {
+    "start": "serve .",
+    "test": "node --experimental-wasm-threads --experimental-wasm-bulk-memory ./node_modules/.bin/jest"
+  },
+  "version": "0.10.0"
+}

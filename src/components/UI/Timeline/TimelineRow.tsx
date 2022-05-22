@@ -5,9 +5,24 @@ import { CgEyeAlt } from "react-icons/cg";
 import { MusicIcon } from "../../Assets/SVGs";
 import { AudioTimeline, VideoTimeline, TimelineHeader } from "../Timelines";
 
+import { Dispatch, SetStateAction } from "react";
 import "./Timeline.scss";
 
-const TimelineRow = ({ variant }: { variant: string }): JSX.Element => {
+interface TimelineRowProps {
+    variant: string;
+    currentTime: number;
+    setCurrentTime: Dispatch<SetStateAction<number>>;
+    duration: number;
+    setDuration: Dispatch<SetStateAction<number>>;
+}
+
+const TimelineRow = ({
+    variant,
+    currentTime,
+    setCurrentTime,
+    duration,
+    setDuration,
+}: TimelineRowProps): JSX.Element => {
     switch (variant) {
         case "header":
             return (
@@ -21,7 +36,7 @@ const TimelineRow = ({ variant }: { variant: string }): JSX.Element => {
                     </div>
                 </div>
             );
-            break;
+
         case "video":
             return (
                 <div className="TimelineGridRow">
@@ -30,10 +45,16 @@ const TimelineRow = ({ variant }: { variant: string }): JSX.Element => {
                         <CgEyeAlt color="#4f4f4f" size={15} />
                     </div>
                     <div className="timelineWrapper">
-                        <VideoTimeline />
+                        <VideoTimeline
+                            currentTime={currentTime}
+                            setCurrentTime={setCurrentTime}
+                            duration={duration}
+                            setDuration={setDuration}
+                        />
                     </div>
                 </div>
             );
+
         case "song":
             return (
                 <div className="TimelineGridRow">
@@ -46,6 +67,7 @@ const TimelineRow = ({ variant }: { variant: string }): JSX.Element => {
                     </div>
                 </div>
             );
+
         default:
             return (
                 <div className="TimelineGridRow">
@@ -53,7 +75,6 @@ const TimelineRow = ({ variant }: { variant: string }): JSX.Element => {
                     <div></div>
                 </div>
             );
-            break;
     }
 };
 

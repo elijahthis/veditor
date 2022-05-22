@@ -3,7 +3,7 @@ import Slider from "../../Slider";
 import "./VideoCard.scss";
 import {
     CameraIcon,
-    VolumeUp,
+    // VolumeUp,
     VolumeDown,
     ExpandIcon,
     SkipFD,
@@ -13,7 +13,7 @@ import {
     PlayIcon1,
 } from "../../../Assets/SVGs";
 import Dropdown from "../../Dropdown";
-import { MutableRefObject, useEffect, useRef, useState } from "react";
+import { MutableRefObject, useRef, useState } from "react";
 import { secondsToTime } from "../../../../helpers/functions";
 
 declare global {
@@ -27,16 +27,41 @@ declare global {
 interface VideoCardProps {
     currentVideo: string;
     setCurrentVideo: Dispatch<SetStateAction<string>>;
+    currentTime: number;
+    setCurrentTime: Dispatch<SetStateAction<number>>;
+    duration: number;
+    setDuration: Dispatch<SetStateAction<number>>;
 }
 
 const VideoCard = ({
     currentVideo,
     setCurrentVideo,
+    currentTime,
+    setCurrentTime,
+    duration,
+    setDuration,
 }: VideoCardProps): JSX.Element => {
     const videoRef = useRef() as MutableRefObject<HTMLVideoElement>;
     const [paused, setPaused] = useState(true);
-    const [duration, setDuration] = useState(0);
-    const [currentTime, setCurrentTime] = useState(0);
+
+    const convertToGif = () => {
+        fetch("http://localhost:3211/upload", {
+            method: "post",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+                filename: "currentVid.mp4",
+                filepath:
+                    currentVideo ||
+                    "http://localhost:3000/assets/video/Real 4K HDR .mp4",
+            }),
+        });
+        console.log(
+            currentVideo ||
+                "http://localhost:3000/assets/video/Real 4K HDR .mp4"
+        );
+    };
 
     return (
         <div className="VideoCard">
@@ -59,7 +84,9 @@ const VideoCard = ({
                         try {
                             const videoInterval = setInterval(() => {
                                 setCurrentTime(videoRef.current.currentTime);
+                                console.log("interval");
                             }, 50);
+                            if (false) clearInterval(videoInterval);
                         } catch (e) {
                             console.log(e);
                         }
@@ -121,7 +148,9 @@ const VideoCard = ({
                     </div>
                     <div className="VideoCard__controls__other">
                         <CameraIcon size={18} />
-                        <VolumeDown size={18} />
+                        <span onClick={convertToGif}>
+                            <VolumeDown size={18} />
+                        </span>
                         <span
                             onClick={() => {
                                 if (videoRef.current.requestFullscreen) {

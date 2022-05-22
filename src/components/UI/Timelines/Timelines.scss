@@ -1,11 +1,46 @@
 .VideoTimeline {
     width: 100%;
     height: 100%;
-    background: #28714f 0% 0% no-repeat padding-box;
+    background: #6a6b6b 0% 0% no-repeat padding-box;
 
     border-radius: 5px;
     position: relative;
-    padding: 2px;
+    user-select: none;
+
+    &__green {
+        // width: 100%;
+        height: 100%;
+        padding: 2px;
+        // border-radius: 5px;
+        background: #28714f 0% 0% no-repeat padding-box;
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        cursor: grab;
+    }
+
+    &__edge {
+        width: 7px;
+        height: 100%;
+        position: absolute;
+        top: 0;
+        background-color: white;
+        cursor: e-resize;
+
+        &--left {
+            border-top-left-radius: 3px;
+            border-bottom-left-radius: 3px;
+            left: 0;
+            transform: translateX(-70%);
+        }
+        &--right {
+            border-top-right-radius: 3px;
+            border-bottom-right-radius: 3px;
+            right: 0;
+            transform: translateX(70%);
+        }
+    }
 
     &__placeholder {
         width: 42px;
