@@ -1,4 +1,4 @@
-import { Dispatch, useState, SetStateAction, useEffect } from "react";
+import { Dispatch, SetStateAction } from "react";
 import "./ModalChildren.scss";
 import { ImportVeditor, ImportDevice } from "../../../Assets/SVGs";
 import { IoClose } from "react-icons/io5";
@@ -14,10 +14,6 @@ const ImportVideo = ({
     currentVideo,
     setCurrentVideo,
 }: ImportVideoProps): JSX.Element => {
-    useEffect(() => {
-        console.log("import their daddy");
-        console.log(currentVideo);
-    }, []);
     return (
         <div className="ImportVideo" onClick={(ev) => ev.stopPropagation()}>
             <div className="ImportVideo__header">
