@@ -33,11 +33,16 @@ const VideoTimeline = ({
     ) => {
         const MouseMoveFunc = (ev: MouseEvent) => {
             // console.log("moving");
-            console.log(Math.max(0, ev.clientX - mouseDownEv.clientX));
+            // console.log(Math.max(0, ev.clientX - mouseDownEv.clientX));
             setLeftOffset(
                 Math.max(0, ev.clientX - mouseDownEv.clientX + leftOffset)
             );
-            // console.log(ev.clientX);
+            setCurrentTime(
+                (Math.max(0, ev.clientX - mouseDownEv.clientX + leftOffset) /
+                    initialLength) *
+                    duration
+            );
+            console.log(vidTimelineRef.current.clientWidth);
         };
         const MouseUpFunc = (ev: MouseEvent) => {
             window.removeEventListener("mousemove", MouseMoveFunc);

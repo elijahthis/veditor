@@ -113,3 +113,9 @@
     padding-bottom: 12.5px;
     border-bottom: 1px solid #161515;
 }
+
+@media screen and (max-width: 1180px) {
+    .SideCard {
+        display: none;
+    }
+}

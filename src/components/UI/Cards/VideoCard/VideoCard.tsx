@@ -1,4 +1,4 @@
-import { Dispatch, SetStateAction } from "react";
+import { Dispatch, SetStateAction, useEffect } from "react";
 import Slider from "../../Slider";
 import "./VideoCard.scss";
 import {
@@ -15,6 +15,8 @@ import {
 import Dropdown from "../../Dropdown";
 import { MutableRefObject, useRef, useState } from "react";
 import { secondsToTime } from "../../../../helpers/functions";
+
+import Test from "./test";
 
 declare global {
     interface Element {
@@ -175,6 +177,7 @@ const VideoCard = ({
                     </div>
                 </div>
             </div>
+            <Test />
         </div>
     );
 };

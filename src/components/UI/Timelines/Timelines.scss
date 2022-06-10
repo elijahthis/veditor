@@ -151,3 +151,19 @@
         color: #bababa;
     }
 }
+
+@media screen and (max-width: 1180px) {
+    .TimelineHeader {
+        &__number {
+            display: none;
+        }
+    }
+}
+
+@media screen and (max-width: 700px) {
+    .TimelineHeader {
+        &__line {
+            display: none;
+        }
+    }
+}

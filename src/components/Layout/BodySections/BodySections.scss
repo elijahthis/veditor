@@ -2,10 +2,22 @@
     display: grid;
     grid-template-columns: 23.5fr 53fr 23.5fr;
     gap: 17px;
-    height: 545px;
+    max-height: 545px;
     margin-bottom: 10px;
+    overflow: scroll;
 }
 
 .BodySection2 {
     width: 100%;
+}
+
+@media screen and (max-width: 1180px) {
+    .BodySection1 {
+        display: grid;
+        grid-template-columns: unset;
+        // grid-template-rows: 23.5fr 53fr 23.5fr;
+        gap: 17px;
+        max-height: 1000px;
+        margin-bottom: 10px;
+    }
 }

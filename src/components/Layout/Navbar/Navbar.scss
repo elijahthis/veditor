@@ -76,3 +76,19 @@
         margin-right: 40px;
     }
 }
+
+@media screen and (max-width: 1180px) {
+    .navbar {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+
+        & > :last-child {
+            margin-left: 0; 
+        }
+    }
+    nav {
+        display: none;
+    }
+}

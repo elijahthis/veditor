@@ -14,11 +14,6 @@ const Card1 = (): JSX.Element => {
             title: "How  to edit your first veditor video",
             duration: 60,
         },
-        {
-            image: "/assets/images/imgPlaceholder.png",
-            title: "How  to edit your first veditor video",
-            duration: 60,
-        },
     ];
 
     return (
