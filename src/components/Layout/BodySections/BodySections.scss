@@ -4,11 +4,15 @@
     gap: 17px;
     max-height: 545px;
     margin-bottom: 10px;
-    overflow: scroll;
+    // overflow: scroll;
 }
 
 .BodySection2 {
     width: 100%;
+}
+
+.BodySection3 {
+    padding: 1.5rem 0;
 }
 
 @media screen and (max-width: 1180px) {

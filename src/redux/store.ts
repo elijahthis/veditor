@@ -1,4 +1,4 @@
-import { createStoreHook } from "react-redux";
+// import { createStoreHook } from "react-redux";
 import { configureStore } from "@reduxjs/toolkit";
 import rootReducer from "./reducers/rootReducer";
 

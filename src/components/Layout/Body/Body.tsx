@@ -1,5 +1,5 @@
 import { Dispatch, SetStateAction, useState } from "react";
-import { BodySection1, BodySection2 } from "../BodySections";
+import { BodySection1, BodySection2, BodySection3 } from "../BodySections";
 import "./Body.scss";
 
 interface BodyProps {
@@ -27,6 +27,7 @@ const Body = ({ currentVideo, setCurrentVideo }: BodyProps): JSX.Element => {
                 duration={duration}
                 setDuration={setDuration}
             />
+            <BodySection3 />
         </section>
     );
 };

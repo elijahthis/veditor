@@ -84,6 +84,7 @@
             & > :nth-child(2) {
                 display: flex;
                 gap: 1rem;
+                justify-content: space-between;
             }
         }
     }

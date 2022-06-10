@@ -1,4 +1,4 @@
-import { Dispatch, SetStateAction, useEffect } from "react";
+import { Dispatch, SetStateAction } from "react";
 import Slider from "../../Slider";
 import "./VideoCard.scss";
 import {

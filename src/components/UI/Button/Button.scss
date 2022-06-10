@@ -15,6 +15,11 @@ button {
     color: #ffffff;
     border: 1px solid #ffffff;
     border-radius: 20px;
+
+    &:hover {
+        background-color: #ffffff;
+        color: black;
+    }
 }
 
 .secondary {
