@@ -1,4 +1,4 @@
-import { Dispatch, useState, SetStateAction } from "react";
+import { useState } from "react";
 import { NavLink } from "react-router-dom";
 import Modal from "../../UI/Modals/Modal";
 import {
@@ -17,9 +17,7 @@ import { ImportVideo } from "../../UI/Modals/ModalChildren";
 import "./Navbar.scss";
 import { useModal } from "../../../hooks/useModal";
 
-interface NavbarProps {}
-
-const Navbar = ({}: NavbarProps): JSX.Element => {
+const Navbar = (): JSX.Element => {
     const [active, setActive] = useState(0);
 
     const { openModal, setOpenModal, modalChild, setModalChild } = useModal();

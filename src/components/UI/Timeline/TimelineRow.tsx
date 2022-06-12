@@ -5,7 +5,6 @@ import { CgEyeAlt } from "react-icons/cg";
 import { MusicIcon } from "../../Assets/SVGs";
 import { AudioTimeline, VideoTimeline, TimelineHeader } from "../Timelines";
 
-import { Dispatch, SetStateAction } from "react";
 import "./Timeline.scss";
 
 interface TimelineRowProps {

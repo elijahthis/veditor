@@ -1,4 +1,3 @@
-import { Dispatch, SetStateAction } from "react";
 import "./BodySections.scss";
 import Timeline from "../../UI/Timeline";
 

@@ -1,10 +1,9 @@
-import { useEffect, useState, Dispatch, SetStateAction } from "react";
+import { useEffect, useState } from "react";
 import { useRef, MutableRefObject } from "react";
 import "./Timelines.scss";
 import { RootState } from "../../../redux/store";
 import { useSelector, useDispatch } from "react-redux";
 import { SETCURRENTTIME } from "../../../redux/slices/currentTimeSlice";
-import { SETDURATION } from "../../../redux/slices/durationSlice";
 
 const VideoTimeline = (): JSX.Element => {
     const vidTimelineRef = useRef() as MutableRefObject<HTMLDivElement>;

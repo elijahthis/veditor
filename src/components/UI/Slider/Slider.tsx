@@ -1,6 +1,5 @@
 import "./Slider.scss";
-import { RootState } from "../../../redux/store";
-import { useSelector, useDispatch } from "react-redux";
+import { useDispatch } from "react-redux";
 import { SETCURRENTTIME } from "../../../redux/slices/currentTimeSlice";
 
 interface SliderProps {

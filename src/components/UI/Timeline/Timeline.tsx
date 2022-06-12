@@ -1,4 +1,3 @@
-import { Dispatch, SetStateAction } from "react";
 import TimelineRow from "./TimelineRow";
 import "./Timeline.scss";
 

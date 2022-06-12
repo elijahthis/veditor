@@ -1,4 +1,3 @@
-import { Dispatch, SetStateAction, useEffect } from "react";
 import Slider from "../../Slider";
 import "./VideoCard.scss";
 import {
@@ -30,7 +29,6 @@ declare global {
         mozRequestFullScreen(): void;
     }
 }
-interface VideoCardProps {}
 
 const VideoCard = (): JSX.Element => {
     const videoRef = useRef() as MutableRefObject<HTMLVideoElement>;
@@ -44,10 +42,6 @@ const VideoCard = (): JSX.Element => {
     );
     const duration = useSelector((state: RootState) => state.duration.duration);
     const dispatch = useDispatch();
-
-    // useEffect(() => {
-    //     console.log(currentVideo);
-    // }, [currentVideo]);
 
     const convertToGif = () => {
         fetch("http://localhost:3211/upload", {
