@@ -17,15 +17,9 @@ import { ImportVideo } from "../../UI/Modals/ModalChildren";
 import "./Navbar.scss";
 import { useModal } from "../../../hooks/useModal";
 
-interface NavbarProps {
-    currentVideo: string;
-    setCurrentVideo: Dispatch<SetStateAction<string>>;
-}
+interface NavbarProps {}
 
-const Navbar = ({
-    currentVideo,
-    setCurrentVideo,
-}: NavbarProps): JSX.Element => {
+const Navbar = ({}: NavbarProps): JSX.Element => {
     const [active, setActive] = useState(0);
 
     const { openModal, setOpenModal, modalChild, setModalChild } = useModal();
@@ -37,13 +31,7 @@ const Navbar = ({
             icon: <NavSVG2 />,
             clickFunc: () => {
                 console.log("button clickedd");
-                setModalChild(
-                    <ImportVideo
-                        setOpenModal={setOpenModal}
-                        currentVideo={currentVideo}
-                        setCurrentVideo={setCurrentVideo}
-                    />
-                );
+                setModalChild(<ImportVideo setOpenModal={setOpenModal} />);
                 setOpenModal(true);
             },
         },

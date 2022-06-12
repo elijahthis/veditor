@@ -10,19 +10,9 @@ import "./Timeline.scss";
 
 interface TimelineRowProps {
     variant: string;
-    currentTime: number;
-    setCurrentTime: Dispatch<SetStateAction<number>>;
-    duration: number;
-    setDuration: Dispatch<SetStateAction<number>>;
 }
 
-const TimelineRow = ({
-    variant,
-    currentTime,
-    setCurrentTime,
-    duration,
-    setDuration,
-}: TimelineRowProps): JSX.Element => {
+const TimelineRow = ({ variant }: TimelineRowProps): JSX.Element => {
     switch (variant) {
         case "header":
             return (
@@ -45,12 +35,7 @@ const TimelineRow = ({
                         <CgEyeAlt color="#4f4f4f" size={15} />
                     </div>
                     <div className="timelineWrapper">
-                        <VideoTimeline
-                            currentTime={currentTime}
-                            setCurrentTime={setCurrentTime}
-                            duration={duration}
-                            setDuration={setDuration}
-                        />
+                        <VideoTimeline />
                     </div>
                 </div>
             );

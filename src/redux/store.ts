@@ -1,12 +1,14 @@
-// import { createStoreHook } from "react-redux";
 import { configureStore } from "@reduxjs/toolkit";
-import rootReducer from "./reducers/rootReducer";
+import currentVideoReducer from "./slices/currentVideoSlice";
+import currentTimeReducer from "./slices/currentTimeSlice";
+import durationReducer from "./slices/durationSlice";
 
-export const store = configureStore({reducer:{ todos: rootReducer }});
+export const store = configureStore({ reducer: {
+    currentVideo: currentVideoReducer,
+    currentTime: currentTimeReducer,
+    duration: durationReducer,
+  }
+})
 
-const todoAction = { type: "ADD_TODO", todo: "buy milk" };
-store.dispatch(todoAction);
-
-export type RootState = ReturnType<typeof store.getState>;
-// Inferred type: {posts: PostsState, comments: CommentsState, users: UsersState}
-export type AppDispatch = typeof store.dispatch;
+export type RootState = ReturnType<typeof store.getState>
+export type AppDispatch = typeof store.dispatch

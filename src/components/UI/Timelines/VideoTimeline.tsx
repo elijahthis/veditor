@@ -1,23 +1,23 @@
 import { useEffect, useState, Dispatch, SetStateAction } from "react";
 import { useRef, MutableRefObject } from "react";
 import "./Timelines.scss";
+import { RootState } from "../../../redux/store";
+import { useSelector, useDispatch } from "react-redux";
+import { SETCURRENTTIME } from "../../../redux/slices/currentTimeSlice";
+import { SETDURATION } from "../../../redux/slices/durationSlice";
 
-const VideoTimeline = ({
-    currentTime,
-    setCurrentTime,
-    duration,
-    setDuration,
-}: {
-    currentTime: number;
-    setCurrentTime: Dispatch<SetStateAction<number>>;
-    duration: number;
-    setDuration: Dispatch<SetStateAction<number>>;
-}): JSX.Element => {
+const VideoTimeline = (): JSX.Element => {
     const vidTimelineRef = useRef() as MutableRefObject<HTMLDivElement>;
     const [resizing, setResizing] = useState(false);
     const [initialLength, setInitialLength] = useState(0);
     const [leftOffset, setLeftOffset] = useState(0);
     const [rightOffset, setRightOffset] = useState(0);
+
+    const dispatch = useDispatch();
+    const currentTime = useSelector(
+        (state: RootState) => state.currentTime.currentTime
+    );
+    const duration = useSelector((state: RootState) => state.duration.duration);
 
     const posn = (currentTime / duration) * 100;
 
@@ -37,10 +37,15 @@ const VideoTimeline = ({
             setLeftOffset(
                 Math.max(0, ev.clientX - mouseDownEv.clientX + leftOffset)
             );
-            setCurrentTime(
-                (Math.max(0, ev.clientX - mouseDownEv.clientX + leftOffset) /
-                    initialLength) *
-                    duration
+            dispatch(
+                SETCURRENTTIME(
+                    (Math.max(
+                        0,
+                        ev.clientX - mouseDownEv.clientX + leftOffset
+                    ) /
+                        initialLength) *
+                        duration
+                )
             );
             console.log(vidTimelineRef.current.clientWidth);
         };

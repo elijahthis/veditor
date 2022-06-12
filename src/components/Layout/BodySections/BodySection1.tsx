@@ -4,33 +4,10 @@ import VideoCard from "../../UI/Cards/VideoCard";
 
 import "./BodySections.scss";
 
-interface BodySection1Props {
-    currentVideo: string;
-    setCurrentVideo: Dispatch<SetStateAction<string>>;
-    currentTime: number;
-    setCurrentTime: Dispatch<SetStateAction<number>>;
-    duration: number;
-    setDuration: Dispatch<SetStateAction<number>>;
-}
-
-const BodySection1 = ({
-    currentVideo,
-    setCurrentVideo,
-    currentTime,
-    setCurrentTime,
-    duration,
-    setDuration,
-}: BodySection1Props): JSX.Element => (
+const BodySection1 = (): JSX.Element => (
     <section className="BodySection1">
         <Card1 />
-        <VideoCard
-            currentVideo={currentVideo}
-            setCurrentVideo={setCurrentVideo}
-            currentTime={currentTime}
-            setCurrentTime={setCurrentTime}
-            duration={duration}
-            setDuration={setDuration}
-        />
+        <VideoCard />
         <Card2 />
     </section>
 );

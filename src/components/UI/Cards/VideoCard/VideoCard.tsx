@@ -1,4 +1,4 @@
-import { Dispatch, SetStateAction } from "react";
+import { Dispatch, SetStateAction, useEffect } from "react";
 import Slider from "../../Slider";
 import "./VideoCard.scss";
 import {
@@ -15,6 +15,10 @@ import {
 import Dropdown from "../../Dropdown";
 import { MutableRefObject, useRef, useState } from "react";
 import { secondsToTime } from "../../../../helpers/functions";
+import { RootState } from "../../../../redux/store";
+import { useSelector, useDispatch } from "react-redux";
+import { SETCURRENTTIME } from "../../../../redux/slices/currentTimeSlice";
+import { SETDURATION } from "../../../../redux/slices/durationSlice";
 
 import Test from "./test";
 
@@ -26,25 +30,24 @@ declare global {
         mozRequestFullScreen(): void;
     }
 }
-interface VideoCardProps {
-    currentVideo: string;
-    setCurrentVideo: Dispatch<SetStateAction<string>>;
-    currentTime: number;
-    setCurrentTime: Dispatch<SetStateAction<number>>;
-    duration: number;
-    setDuration: Dispatch<SetStateAction<number>>;
-}
+interface VideoCardProps {}
 
-const VideoCard = ({
-    currentVideo,
-    setCurrentVideo,
-    currentTime,
-    setCurrentTime,
-    duration,
-    setDuration,
-}: VideoCardProps): JSX.Element => {
+const VideoCard = (): JSX.Element => {
     const videoRef = useRef() as MutableRefObject<HTMLVideoElement>;
     const [paused, setPaused] = useState(true);
+
+    const currentVideo = useSelector(
+        (state: RootState) => state.currentVideo.currentVideo
+    );
+    const currentTime = useSelector(
+        (state: RootState) => state.currentTime.currentTime
+    );
+    const duration = useSelector((state: RootState) => state.duration.duration);
+    const dispatch = useDispatch();
+
+    // useEffect(() => {
+    //     console.log(currentVideo);
+    // }, [currentVideo]);
 
     const convertToGif = () => {
         fetch("http://localhost:3211/upload", {
@@ -80,12 +83,14 @@ const VideoCard = ({
                         setPaused(false);
                     }}
                     onLoadedMetadata={() => {
-                        setDuration(videoRef.current.duration);
+                        dispatch(SETDURATION(videoRef.current.duration));
                     }}
                     onCanPlayThrough={() => {
                         try {
                             const videoInterval = setInterval(() => {
-                                setCurrentTime(videoRef.current.currentTime);
+                                dispatch(
+                                    SETCURRENTTIME(videoRef.current.currentTime)
+                                );
                                 console.log("interval");
                             }, 50);
                             if (false) clearInterval(videoInterval);
@@ -99,8 +104,6 @@ const VideoCard = ({
                 <div>
                     <Slider
                         posn={(currentTime / duration) * 100}
-                        currentTime={currentTime}
-                        setCurrentTime={setCurrentTime}
                         duration={duration}
                         vidElement={videoRef.current}
                     />
