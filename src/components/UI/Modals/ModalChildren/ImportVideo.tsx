@@ -1,23 +1,26 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import "./ModalChildren.scss";
 import { ImportVeditor, ImportDevice } from "../../../Assets/SVGs";
 import { IoClose } from "react-icons/io5";
 import { useDispatch } from "react-redux";
+import { Audio } from "react-loader-spinner";
 import { SETCURRENTVIDEO } from "../../../../redux/slices/currentVideoSlice";
+import { SETSTOREDVIDEO } from "../../../../redux/slices/storedVideoSlice";
+import { uploadVid } from "../../../../services/apis";
 
 interface ImportVideoProps {
     setOpenModal: (argg: boolean) => void;
 }
 
 const ImportVideo = ({ setOpenModal }: ImportVideoProps): JSX.Element => {
-    useEffect(() => {
-        const myForm = document.querySelector("#myForm");
-        const formData = new FormData(myForm as HTMLFormElement);
-        console.log(formData);
-    }, []);
-    const myForm = document.querySelector("#myForm");
+    const [loading, setLoading] = useState(false);
+    const [myForm, setMyForm] = useState({});
 
     const dispatch = useDispatch();
+
+    useEffect(() => {
+        setMyForm(document.querySelector("#myForm")!);
+    }, []);
 
     return (
         <div className="ImportVideo" onClick={(ev) => ev.stopPropagation()}>
@@ -26,7 +29,7 @@ const ImportVideo = ({ setOpenModal }: ImportVideoProps): JSX.Element => {
                 <p>Please select how you would like to import your video</p>
             </div>
             <form
-                action="http://localhost:3211/upload"
+                // action="http://localhost:3211/upload"
                 encType="multipart/form-data"
                 method="POST"
                 id="myForm"
@@ -39,45 +42,51 @@ const ImportVideo = ({ setOpenModal }: ImportVideoProps): JSX.Element => {
                         <ImportVeditor />
                         <p>Import From Veditor</p>
                     </div>
-                    <div className="ImportVideo__option">
-                        <ImportDevice />
-                        <p>Import From Device</p>
+                    {!loading ? (
+                        <div className="ImportVideo__option">
+                            <ImportDevice />
+                            <p>Import From Device</p>
 
-                        <input
-                            type="file"
-                            accept="video/*"
-                            name="newVideo"
-                            id=""
-                            onChange={(ev) => {
-                                dispatch(
-                                    SETCURRENTVIDEO(
-                                        URL.createObjectURL(ev.target.files![0])
-                                    )
-                                );
-                                const data = new FormData(
-                                    myForm as HTMLFormElement
-                                );
+                            <input
+                                type="file"
+                                accept="video/*"
+                                name="newVideo"
+                                id=""
+                                disabled={loading}
+                                onChange={async (ev) => {
+                                    dispatch(
+                                        SETCURRENTVIDEO(
+                                            URL.createObjectURL(
+                                                ev.target.files![0]
+                                            )
+                                        )
+                                    );
+                                    const data = new FormData(
+                                        myForm as HTMLFormElement
+                                    );
 
-                                fetch("http://localhost:3211/upload", {
-                                    method: "post",
-                                    body: data,
-                                })
-                                    .then((res) => res.json())
-                                    .then((res) => {
-                                        console.log(res);
-                                    });
-                            }}
+                                    setLoading(true);
+                                    try {
+                                        const res: any = await uploadVid(data);
+                                        dispatch(SETSTOREDVIDEO(res?.data));
+                                        console.log("stored");
+                                        setLoading(false);
+                                    } catch (err) {
+                                        console.log(err);
+                                        setLoading(false);
+                                    }
+                                }}
+                            />
+                        </div>
+                    ) : (
+                        <Audio
+                            height="100"
+                            width="100"
+                            color="grey"
+                            ariaLabel="loading"
                         />
-                    </div>
+                    )}
                 </div>
-                <input
-                    type="submit"
-                    name=""
-                    id=""
-                    onClick={(ev) => {
-                        ev.stopPropagation();
-                    }}
-                />
             </form>
             <div className="close" onClick={() => setOpenModal(false)}>
                 <IoClose size={14} />

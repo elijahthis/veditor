@@ -15,6 +15,7 @@ button {
     color: #ffffff;
     border: 1px solid #ffffff;
     border-radius: 20px;
+    transition: color ease-in 0.5s, background-color ease-in 0.5s;
 
     &:hover {
         background-color: #ffffff;

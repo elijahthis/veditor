@@ -10,7 +10,7 @@ const TimelineHeader = (): JSX.Element => {
                     .map((item, ind) => (
                         <div className="TimelineHeader__line" key={ind}></div>
                     ))}
-                {Array(61)
+                {Array(28)
                     .fill(0)
                     .map((item, ind) => (
                         <div

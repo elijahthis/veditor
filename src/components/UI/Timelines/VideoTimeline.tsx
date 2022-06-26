@@ -4,9 +4,11 @@ import "./Timelines.scss";
 import { RootState } from "../../../redux/store";
 import { useSelector, useDispatch } from "react-redux";
 import { SETCURRENTTIME } from "../../../redux/slices/currentTimeSlice";
+import { SETEDGETIMES } from "../../../redux/slices/edgeTimesSlice";
 
 const VideoTimeline = (): JSX.Element => {
     const vidTimelineRef = useRef() as MutableRefObject<HTMLDivElement>;
+    const greenTimelineRef = useRef() as MutableRefObject<HTMLDivElement>;
     const [resizing, setResizing] = useState(false);
     const [initialLength, setInitialLength] = useState(0);
     const [leftOffset, setLeftOffset] = useState(0);
@@ -17,8 +19,14 @@ const VideoTimeline = (): JSX.Element => {
         (state: RootState) => state.currentTime.currentTime
     );
     const duration = useSelector((state: RootState) => state.duration.duration);
+    const edgeTimes = useSelector(
+        (state: RootState) => state.edgeTimes.edgeTimes
+    );
 
-    const posn = (currentTime / duration) * 100;
+    const posn =
+        ((currentTime - edgeTimes.start) /
+            (duration - edgeTimes.start - (duration - edgeTimes.end))) *
+        100;
 
     useEffect(() => {
         setInitialLength(vidTimelineRef.current.clientWidth);
@@ -31,24 +39,36 @@ const VideoTimeline = (): JSX.Element => {
         mouseDownEv: React.MouseEvent<HTMLDivElement>
     ) => {
         const MouseMoveFunc = (ev: MouseEvent) => {
-            // console.log("moving");
-            // console.log(Math.max(0, ev.clientX - mouseDownEv.clientX));
-            setLeftOffset(
-                Math.max(0, ev.clientX - mouseDownEv.clientX + leftOffset)
-            );
-            dispatch(
-                SETCURRENTTIME(
-                    (Math.max(
-                        0,
-                        ev.clientX - mouseDownEv.clientX + leftOffset
-                    ) /
-                        initialLength) *
-                        duration
-                )
-            );
-            console.log(vidTimelineRef.current.clientWidth);
+            if (
+                ev.clientX <
+                vidTimelineRef.current.clientWidth -
+                    rightOffset +
+                    vidTimelineRef.current.offsetLeft
+            ) {
+                setLeftOffset(
+                    Math.max(0, ev.clientX - mouseDownEv.clientX + leftOffset)
+                );
+
+                console.log(vidTimelineRef.current.clientWidth);
+            }
         };
         const MouseUpFunc = (ev: MouseEvent) => {
+            dispatch(
+                SETEDGETIMES({
+                    ...edgeTimes,
+                    start: Math.min(
+                        (Math.max(
+                            0,
+                            ev.clientX - mouseDownEv.clientX + leftOffset
+                        ) /
+                            initialLength) *
+                            duration,
+                        edgeTimes.end
+                    ),
+                })
+            );
+            dispatch(SETCURRENTTIME(edgeTimes.start));
+
             window.removeEventListener("mousemove", MouseMoveFunc);
             window.removeEventListener("mouseup", MouseUpFunc);
             console.log("clean");
@@ -62,14 +82,39 @@ const VideoTimeline = (): JSX.Element => {
         mouseDownEv: React.MouseEvent<HTMLDivElement>
     ) => {
         const MouseMoveFunc = (ev: MouseEvent) => {
-            console.log(ev.clientX);
-            // console.log(Math.max(0, ev.clientX - mouseDownEv.clientX));
-            setRightOffset(
-                Math.max(0, mouseDownEv.clientX - ev.clientX + rightOffset)
-            );
-            // console.log(ev.clientX);
+            if (ev.clientX - vidTimelineRef.current.offsetLeft > leftOffset) {
+                console.log("ev.clientX", ev.clientX);
+                console.log("leftOffset", leftOffset);
+                // console.log(Math.max(0, ev.clientX - mouseDownEv.clientX));
+                setRightOffset(
+                    Math.max(0, mouseDownEv.clientX - ev.clientX + rightOffset)
+                );
+            }
         };
         const MouseUpFunc = (ev: MouseEvent) => {
+            console.log(
+                "timeline element: ",
+                vidTimelineRef.current.offsetLeft
+            );
+            console.log("Mousedown clientX: ", mouseDownEv.clientX);
+            console.log("mouseup clientX: ", ev.clientX);
+            console.log("rightOffset: ", rightOffset);
+            console.log("greenTimelineRef: ", greenTimelineRef.current);
+            dispatch(
+                SETEDGETIMES({
+                    ...edgeTimes,
+                    end: Math.max(
+                        edgeTimes.start,
+                        Math.min(
+                            ((ev.clientX - vidTimelineRef.current.offsetLeft) /
+                                initialLength) *
+                                duration,
+                            duration
+                        )
+                    ),
+                })
+            );
+
             window.removeEventListener("mousemove", MouseMoveFunc);
             window.removeEventListener("mouseup", MouseUpFunc);
             setResizing(false);
@@ -81,7 +126,7 @@ const VideoTimeline = (): JSX.Element => {
     };
 
     return (
-        <div className="VideoTimeline">
+        <div className="VideoTimeline" ref={vidTimelineRef}>
             <div
                 className="VideoTimeline__edge VideoTimeline__edge--left"
                 style={{ left: `${(leftOffset / initialLength) * 100}%` }}
@@ -94,12 +139,12 @@ const VideoTimeline = (): JSX.Element => {
             ></div>
             <div
                 className="VideoTimeline__green"
+                ref={greenTimelineRef}
                 style={{
                     left: `${(leftOffset / initialLength) * 100}%`,
                     right: `${(rightOffset / initialLength) * 100}%`,
                     cursor: resizing ? "grab" : "default",
                 }}
-                ref={vidTimelineRef}
 
                 // onMouseMove={(ev) => {}}
             >

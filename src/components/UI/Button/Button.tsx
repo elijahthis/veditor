@@ -1,4 +1,5 @@
 import "./Button.scss";
+import { Audio } from "react-loader-spinner";
 
 interface ButtonProps {
     children: JSX.Element | string;
@@ -6,6 +7,7 @@ interface ButtonProps {
     disabled?: boolean;
     onClick?: () => void;
     href?: string;
+    loading?: boolean;
 }
 
 const Button = ({
@@ -14,6 +16,7 @@ const Button = ({
     disabled = false,
     onClick,
     href,
+    loading = false,
 }: ButtonProps): JSX.Element => {
     // const VARIANTS: string[] = ["primary", "secondary"];
     const disabledStyle = disabled && "disabled";
@@ -21,7 +24,7 @@ const Button = ({
     const ButtonClassName = `${variant} ${disabledStyle}`;
 
     const clickFunc = () => {
-        if (disabled) return;
+        if (disabled || loading) return;
         else if (href) {
             return;
         } else {
@@ -31,7 +34,16 @@ const Button = ({
 
     return (
         <button className={ButtonClassName} onClick={clickFunc}>
-            {children}
+            {loading ? (
+                <Audio
+                    height="18"
+                    width="18"
+                    color="grey"
+                    ariaLabel="loading"
+                />
+            ) : (
+                children
+            )}
         </button>
     );
 };

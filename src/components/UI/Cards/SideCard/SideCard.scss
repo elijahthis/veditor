@@ -109,6 +109,45 @@
     }
 }
 
+h3 {
+    color: #ffffff !important;
+}
+
+.tasks {
+    margin-top: 2.5rem;
+
+    &__blocks {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+        gap: 0.5rem;
+        margin-top: 1rem;
+
+        > * {
+            background: #080808 0% 0% no-repeat padding-box;
+            width: 100%;
+            height: 7rem;
+            border-radius: 0.5rem;
+            cursor: pointer;
+
+            display: grid;
+            place-items: center;
+        }
+        > .active {
+            background: #1a1a1a 0% 0% no-repeat padding-box;
+        }
+    }
+}
+
+.my-dropdown {
+    background-color: #080808 !important;
+
+    .ant-select-item {
+        color: #ffffff !important;
+    }
+}
+
 .waveDiv {
     padding-bottom: 12.5px;
     border-bottom: 1px solid #161515;
