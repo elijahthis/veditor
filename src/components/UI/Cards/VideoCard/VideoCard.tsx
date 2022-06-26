@@ -57,6 +57,7 @@ const VideoCard = (): JSX.Element => {
 
     return (
         <div className="VideoCard">
+            <p>{process.env.REACT_APP_BASE_URL}</p>
             <div className="VideoCard__placeholder">
                 <video
                     src={currentVideo || "/assets/video/Real 4K HDR .mp4"}

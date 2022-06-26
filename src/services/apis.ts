@@ -1,10 +1,9 @@
 import axios from "axios"
-import { BASE_URL } from "./env"
 
 export const uploadVid = async (payload: FormData)=>{
     try{
     const response = await axios.post(
-        `${BASE_URL}/upload`,
+        `${process.env.REACT_APP_BASE_URL}/upload`,
         payload
     )
     return response
@@ -19,7 +18,7 @@ export const transcodeVid = async (payload: {filename:string; filepath:string; f
     try{
     const response = await axios({
         method: 'post', 
-        url: `${BASE_URL}/transcode`,
+        url: `${process.env.REACT_APP_BASE_URL}/transcode`,
         data: payload,
         responseType: 'blob'
     })
@@ -36,7 +35,7 @@ export const trimVid = async (payload: {filename:string; filepath:string; start:
     try{
     const response = await axios({
         method: 'post', 
-        url: `${BASE_URL}/trim`,
+        url: `${process.env.REACT_APP_BASE_URL}/trim`,
         data: payload,
         responseType: 'blob'
     })
